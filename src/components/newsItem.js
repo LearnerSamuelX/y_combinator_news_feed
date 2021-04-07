@@ -1,6 +1,7 @@
 import React, { useState,useEffect, Component} from 'react';
 import axios from 'axios';
 import '../styles/newsItem.css'
+import Comments from './comments'
 
 function NewsItem(props){
 
@@ -8,6 +9,16 @@ function NewsItem(props){
     const [content,setContent] = useState([])
     const [comments,setComment] = useState("comment")
     const [refreshSwitch,setRefreshSwitch]=useState(0);
+    const [click,setClick]=useState(0)
+
+    function clickTest(e){
+        e.preventDefault();
+        if(click===0){
+            setClick(1)
+        }else{
+            setClick(0)
+        }
+    }
 
     useEffect(()=>{
         console.log('Newsitem component loaded.')
@@ -45,7 +56,6 @@ function NewsItem(props){
     }else{
         return(
             <div className="newsItem-container">
-    
                 <div className="news_title">
                     {content.title}
                 </div>
@@ -53,7 +63,8 @@ function NewsItem(props){
                     By {content.by}
                 </div>
                 <div className="comments">
-                    {comments.length} comments
+                    <Comments clicked={click} kids_ids={comments}/>
+                    <div className="comment_bar"href={content.id} onClick={clickTest}>{comments.length} comments</div>
                 </div>
             </div>
         )

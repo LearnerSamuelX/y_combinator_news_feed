@@ -8,3 +8,11 @@
     text-align: left;
     margin-bottom:1.5rem;
 }
+
+.comment_bar{
+    cursor: pointer;
+}
+
+.comment_bar:hover{
+    text-decoration: underline;
+}
