@@ -1,4 +1,5 @@
 import React, { useState,useEffect} from 'react';
+import CommentList from './singleComment';
 
 function Comments(props){
 
@@ -20,11 +21,12 @@ function Comments(props){
         )
     }else{
         return(
-            <div className="comment">
-                {/* 
-                    name: Tom,
-                    Content: "I don't understand."
-                 */}
+            <div>
+                 {
+                     comments.map((i)=>{
+                         return( <CommentList kids={i}/>)
+                     })
+                 }
             </div>
         )
     }

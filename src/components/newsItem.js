@@ -63,8 +63,8 @@ function NewsItem(props){
                     By {content.by}
                 </div>
                 <div className="comments">
-                    <Comments clicked={click} kids_ids={comments}/>
                     <div className="comment_bar"href={content.id} onClick={clickTest}>{comments.length} comments</div>
+                    <Comments clicked={click} kids_ids={comments}/>
                 </div>
             </div>
         )
