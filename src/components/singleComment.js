@@ -5,11 +5,7 @@ function CommentList (props){
     //the props here are the kids id
     //so that we can use the text later
     const [commentID, setCommentID] = useState(props.kids)
-    const [commentText,setCommentText] = useState("")
-
-    function textRendering(){
-        return commentText
-    }
+    const [commentText,setCommentText] = useState([])
 
     useEffect(()=>{
         let options = {
@@ -20,16 +16,31 @@ function CommentList (props){
                 'Content-Type': 'application/json;charset=UTF-8'
             }
         }
+        
         axios(options).then((response)=>{
-            setCommentText(response.data.text)
+            console.log(response.data.kids)
+            setCommentText(response.data)
         })
+
     },[])
 
-    return(
-        <div className="single_comment">
-            <div dangerouslySetInnerHTML={{ __html: commentText }}></div>
-        </div>
-    )
+    if(commentText.kids!==undefined){
+        return(
+            <div className="single_comment">
+                <div dangerouslySetInnerHTML={{ __html: "-- "+commentText.text }}></div>
+                {commentText.kids.map((i)=>{
+                    return <CommentList kids={i}/>
+                })}
+            </div>
+        )
+    }else{
+        return(
+            <div className="single_comment">
+                <div dangerouslySetInnerHTML={{ __html: commentText.text }}></div>
+            </div>
+        )
+    }
+   
 }
 
 export default CommentList
